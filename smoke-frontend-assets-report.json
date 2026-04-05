@@ -1,0 +1,36 @@
+{
+  "scannedAt": "2026-04-05T04:56:44.741Z",
+  "baseUrl": "http://127.0.0.1:55719",
+  "pageCount": 4,
+  "failedPageCount": 0,
+  "results": [
+    {
+      "page": "/",
+      "status": 200,
+      "ok": true,
+      "failedAssets": [],
+      "checkedAssets": 111
+    },
+    {
+      "page": "/buff-like-facebook.html",
+      "status": 200,
+      "ok": true,
+      "failedAssets": [],
+      "checkedAssets": 133
+    },
+    {
+      "page": "/login.html",
+      "status": 200,
+      "ok": true,
+      "failedAssets": [],
+      "checkedAssets": 19
+    },
+    {
+      "page": "/register.html",
+      "status": 200,
+      "ok": true,
+      "failedAssets": [],
+      "checkedAssets": 19
+    }
+  ]
+}

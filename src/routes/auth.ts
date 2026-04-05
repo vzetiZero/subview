@@ -38,6 +38,15 @@ authRouter.get("/user/register", (_req, res) => {
   res.send(renderPublicPage("สมัครสมาชิก", `<div class="login-wrap"><div class="card"><div class="login-brand">สร้างบัญชีผู้ใช้</div><form method="post" action="/user/register" class="grid"><div><label>ชื่อผู้ใช้</label><input name="username" required></div><div><label>ชื่อเต็ม</label><input name="full_name" required></div><div><label>อีเมล</label><input name="email"></div><div><label>เบอร์โทร</label><input name="phone"></div><div><label>รหัสผ่าน</label><input name="password" type="password" required></div><button class="btn" type="submit">สมัครสมาชิก</button></form></div></div>`));
 });
 
+authRouter.get("/forgot-password.html", (_req, res) => {
+  res.send(
+    renderPublicPage(
+      "ลืมรหัสผ่าน",
+      `<div class="login-wrap"><div class="card"><div class="login-brand">ลืมรหัสผ่าน</div><p>หน้านี้ยังเป็นเวอร์ชันพื้นฐานสำหรับเว็บที่นำขึ้นใช้งานชั่วคราว</p><p>หากต้องการรีเซ็ตรหัสผ่าน กรุณาติดต่อผู้ดูแลระบบหรือเพิ่ม flow reset password ใน backend ภายหลัง</p><div class="auth-box"><a class="btn" href="/login.html">กลับไปหน้าเข้าสู่ระบบ</a><a class="btn secondary" href="/register.html">สมัครสมาชิก</a></div></div></div>`
+    )
+  );
+});
+
 authRouter.post("/user/register", (req, res) => {
   createUser({ username: String(req.body.username || "").trim(), fullName: String(req.body.full_name || "").trim(), email: String(req.body.email || "").trim() || null, phone: String(req.body.phone || "").trim() || null, passwordHash: createPasswordHash(String(req.body.password || "")), status: "active" });
   res.redirect("/user/login");

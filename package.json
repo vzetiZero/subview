@@ -12,7 +12,8 @@
     "start": "tsx src/server.ts",
     "start:prod": "node dist/server.js",
     "sync:catalog": "tsx src/scripts/syncCatalog.ts",
-    "import:finance": "tsx src/scripts/importFinanceWorkbook.ts"
+    "import:finance": "tsx src/scripts/importFinanceWorkbook.ts",
+    "smoke:frontend": "tsx src/scripts/smokeFrontendAssets.ts"
   },
   "dependencies": {
     "@types/multer": "^2.1.0",
