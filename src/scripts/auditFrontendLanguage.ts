@@ -123,6 +123,11 @@ function pushIssues(target: AuditIssue[], seen: Set<string>, location: string, v
 function collectIssues(document: Document): AuditIssue[] {
   const issues: AuditIssue[] = [];
   const seen = new Set<string>();
+  const view = document.defaultView;
+  const nodeFilter = view?.NodeFilter;
+  const showText = nodeFilter?.SHOW_TEXT ?? 4;
+  const filterAccept = nodeFilter?.FILTER_ACCEPT ?? 1;
+  const filterReject = nodeFilter?.FILTER_REJECT ?? 2;
 
   pushIssues(issues, seen, "title", document.title);
 
@@ -154,16 +159,16 @@ function collectIssues(document: Document): AuditIssue[] {
   }
 
   const container = document.body || document.documentElement;
-  const walker = document.createTreeWalker(container, container.defaultView?.NodeFilter.SHOW_TEXT ?? 4, {
+  const walker = document.createTreeWalker(container, showText, {
     acceptNode(node) {
       const parentName = node.parentElement?.tagName || "";
       if (!node.nodeValue || !node.nodeValue.trim()) {
-        return node.ownerDocument.defaultView?.NodeFilter.FILTER_REJECT ?? 2;
+        return filterReject;
       }
       if (["SCRIPT", "STYLE", "NOSCRIPT", "CODE", "PRE", "TEXTAREA", "SVG"].includes(parentName)) {
-        return node.ownerDocument.defaultView?.NodeFilter.FILTER_REJECT ?? 2;
+        return filterReject;
       }
-      return node.ownerDocument.defaultView?.NodeFilter.FILTER_ACCEPT ?? 1;
+      return filterAccept;
     },
   });
 
