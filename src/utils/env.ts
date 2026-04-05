@@ -58,6 +58,6 @@ export const env = {
 
 export function requireProductionSecret(): void {
   if (env.isProduction && env.sessionSecret === "change-this-in-production") {
-    throw new Error("SESSION_SECRET must be set in production");
+    throw new Error("SESSION_SECRET must be set in production. Add SESSION_SECRET in Render Dashboard -> Environment.");
   }
 }

@@ -101,7 +101,7 @@ Neu anh muon dien tay:
 
 ## 6. Environment variables can dat tren Render
 
-Can dat hoac kiem tra:
+Can dat hoac kiem tra trong `Render Dashboard -> Environment`:
 
 - `NODE_ENV=production`
 - `APP_BASE_URL=https://subviewmmo.pro.vn`
@@ -120,6 +120,12 @@ Neu app dung du lieu mau co san trong repo:
 
 - `DB_PATH=/opt/render/project/src/data/mvp.sqlite`
 - `FRONTEND_ROOT=/opt/render/project/src/frontend`
+
+Luu y quan trong:
+
+- neu anh tao service bang tay tu GitHub repo, `render.yaml` khong tu dong sinh env cho service da tao san
+- vi vay `SESSION_SECRET` van phai them tay trong Render Dashboard
+- loi anh gap vua roi la do service dang chay production nhung chua co `SESSION_SECRET`
 
 ## 7. Gan custom domain `subviewmmo.pro.vn`
 
