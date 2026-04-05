@@ -84,6 +84,15 @@ frontendRouter.get(/^\/cdn\.vinafabo\.net\/(.+)$/, (req, res) => {
   res.redirect(302, `https://cdn.vinafabo.net/${assetPath}`);
 });
 
+frontendRouter.get(/^\/www\.facebook\.com\/(.+)$/, (req, res) => {
+  const assetPath = String((req.params as Record<string, string>)[0] || "");
+  res.redirect(302, `https://www.facebook.com/${assetPath}`);
+});
+
+frontendRouter.get(/^\/www\.youtube\.com\/(.+)$/, (req, res) => {
+  const assetPath = String((req.params as Record<string, string>)[0] || "");
+  res.redirect(302, `https://www.youtube.com/${assetPath}`);
+});
 frontendRouter.get("*", (req, res, next) => {
   if (req.path.startsWith("/api/") || req.path.startsWith("/admin") || req.path.startsWith("/user")) {
     next();
@@ -105,5 +114,6 @@ frontendRouter.get("*", (req, res, next) => {
 
   res.sendFile(filePath);
 });
+
 
 
