@@ -34,7 +34,165 @@ function buildRuntimePreloadScript(): string {
 }
 
 function buildPaymentDock(): string {
-  return `<style id="payment-dock-style">.payment-header-slot{display:flex;align-items:center}.payment-dock{position:relative;font-family:Roboto,Arial,sans-serif}.payment-dock__trigger{appearance:none;border:0;border-radius:999px;background:#4c1d95;color:#fff;padding:7px 12px;font-size:13px;font-weight:800;box-shadow:0 10px 24px rgba(76,29,149,.22);cursor:pointer;white-space:nowrap}.payment-dock__modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);padding:16px;align-items:center;justify-content:center;z-index:99999}.payment-dock.is-open .payment-dock__modal{display:flex}.payment-dock__card{width:min(360px,100%);background:linear-gradient(180deg,#4c1d95,#6d28d9 29%,#fff 29.5%);border-radius:22px;overflow:hidden;box-shadow:0 20px 45px rgba(15,23,42,.28);border:1px solid rgba(76,29,149,.2)}.payment-dock__header{padding:18px 20px;color:#fff;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.payment-dock__bank{font-size:26px;font-weight:900;letter-spacing:.02em}.payment-dock__sub{font-size:13px;opacity:.92;margin-top:4px}.payment-dock__close{appearance:none;border:0;background:rgba(255,255,255,.18);color:#fff;border-radius:999px;width:36px;height:36px;font-size:18px;font-weight:900;cursor:pointer;line-height:1}.payment-dock__body{padding:16px;background:#fff}.payment-dock__qr{display:block;width:100%;max-width:220px;margin:0 auto 14px;border-radius:18px;border:1px solid #e5e7eb;background:#fff}.payment-dock__label{font-size:12px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px}.payment-dock__value{font-size:20px;font-weight:900;color:#111827;word-break:break-word}.payment-dock__meta{font-size:15px;font-weight:700;color:#334155}.payment-dock__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.payment-dock__btn{appearance:none;border:0;border-radius:12px;padding:11px 14px;font-weight:800;cursor:pointer;text-decoration:none;background:#4c1d95;color:#fff}.payment-dock__btn.secondary{background:#eef2ff;color:#312e81}.payment-dock__hint{margin-top:10px;font-size:12px;color:#64748b}@media(max-width:900px){.payment-dock__trigger{font-size:12px;padding:7px 10px}}</style><script id="payment-dock-script">(function(){function initPaymentDock(){if(document.getElementById('payment-dock-mounted'))return;var nav=document.querySelector('.main-header .navbar-nav.ml-auto');if(!nav)return;var item=document.createElement('li');item.className='nav-item payment-header-slot';item.id='payment-dock-mounted';item.innerHTML='<div class="payment-dock" data-payment-dock><button class="payment-dock__trigger" type="button" data-payment-open>QR / ชำระเงิน</button><div class="payment-dock__modal" data-payment-close><section class="payment-dock__card" aria-label="ข้อมูลการชำระเงิน" onclick="event.stopPropagation()"><div class="payment-dock__header"><div><div class="payment-dock__bank">SCB</div><div class="payment-dock__sub">ชำระเงินผ่าน QR หรือโอนเข้าบัญชี</div></div><button class="payment-dock__close" type="button" aria-label="ปิด" title="ปิด" data-payment-close>&times;</button></div><div class="payment-dock__body"><img class="payment-dock__qr" src="/payment/qr.jpg" alt="Thai QR Payment"><div class="payment-dock__label">เลขที่บัญชี</div><div class="payment-dock__value">0334421279</div><div class="payment-dock__label">ชื่อเจ้าของบัญชี</div><div class="payment-dock__meta">นิตยา</div><div class="payment-dock__label">ธนาคาร</div><div class="payment-dock__meta">SCB - ธนาคารไทยพาณิชย์</div><div class="payment-dock__actions"><button class="payment-dock__btn" type="button" data-copy-account="0334421279">คัดลอกเลขบัญชี</button><a class="payment-dock__btn secondary" href="/payment/qr.jpg" target="_blank" rel="noreferrer">เปิด QR</a></div><div class="payment-dock__hint">ชำระเงินเข้าบัญชีเลขที่ : 0334421279</div></div></section></div></div>';nav.appendChild(item);var dock=item.querySelector('[data-payment-dock]');var open=dock.querySelector('[data-payment-open]');var closeEls=dock.querySelectorAll('[data-payment-close]');var copy=dock.querySelector('[data-copy-account]');var autoCloseTimer=null;function closeModal(){dock.classList.remove('is-open');if(autoCloseTimer){clearTimeout(autoCloseTimer);autoCloseTimer=null;}}function openModal(auto){dock.classList.add('is-open');if(auto){if(autoCloseTimer){clearTimeout(autoCloseTimer);}autoCloseTimer=setTimeout(closeModal,5000);}}open.addEventListener('click',function(){openModal(false);});closeEls.forEach(function(el){el.addEventListener('click',closeModal);});copy.addEventListener('click',function(){var value=copy.getAttribute('data-copy-account')||'';if(!value)return;var done=function(){copy.textContent='คัดลอกแล้ว';setTimeout(function(){copy.textContent='คัดลอกเลขบัญชี';},1600);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(value).then(done);}else{var input=document.createElement('input');input.value=value;document.body.appendChild(input);input.select();document.execCommand('copy');input.remove();done();}});setTimeout(function(){openModal(true);},350);}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initPaymentDock);}else{initPaymentDock();}})();</script>`;
+  return `<style id="payment-dock-style">
+    .payment-header-slot{display:flex;align-items:center}
+    .payment-dock{position:relative;font-family:Roboto,Arial,sans-serif}
+    .payment-dock__trigger{appearance:none;border:0;border-radius:999px;background:#4c1d95;color:#fff;padding:7px 12px;font-size:13px;font-weight:800;box-shadow:0 10px 24px rgba(76,29,149,.22);cursor:pointer;white-space:nowrap}
+    .payment-dock__modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);padding:16px;align-items:center;justify-content:center;z-index:99999}
+    .payment-dock.is-open .payment-dock__modal{display:flex}
+    .payment-dock__card{width:min(920px,100%);background:linear-gradient(180deg,#102a43,#1d4f91 24%,#fff 24.5%);border-radius:24px;overflow:hidden;box-shadow:0 20px 45px rgba(15,23,42,.28);border:1px solid rgba(16,42,67,.18)}
+    .payment-dock__header{padding:18px 20px;color:#fff;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+    .payment-dock__bank{font-size:26px;font-weight:900;letter-spacing:.02em}
+    .payment-dock__sub{font-size:13px;opacity:.92;margin-top:4px}
+    .payment-dock__close{appearance:none;border:0;background:rgba(255,255,255,.18);color:#fff;border-radius:999px;width:36px;height:36px;font-size:18px;font-weight:900;cursor:pointer;line-height:1}
+    .payment-dock__body{padding:20px;background:#f8fafc}
+    .payment-dock__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .payment-dock__panel{background:#fff;border:1px solid #dbe6f2;border-radius:20px;padding:16px;box-shadow:0 10px 24px rgba(15,23,42,.08)}
+    .payment-dock__panel-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+    .payment-dock__panel-bank{font-size:22px;font-weight:900;color:#102a43}
+    .payment-dock__panel-sub{font-size:13px;color:#52606d;margin-top:4px}
+    .payment-dock__badge{display:inline-flex;align-items:center;border-radius:999px;background:#e0f2fe;color:#0f4c81;padding:6px 10px;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+    .payment-dock__qr{display:block;width:100%;max-width:250px;aspect-ratio:1/1;margin:0 auto 14px;border-radius:18px;border:1px solid #e5e7eb;background:#fff;object-fit:cover}
+    .payment-dock__label{font-size:12px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px}
+    .payment-dock__value{font-size:20px;font-weight:900;color:#111827;word-break:break-word}
+    .payment-dock__meta{font-size:15px;font-weight:700;color:#334155}
+    .payment-dock__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .payment-dock__btn{appearance:none;border:0;border-radius:12px;padding:11px 14px;font-weight:800;cursor:pointer;text-decoration:none;background:#1d4f91;color:#fff}
+    .payment-dock__btn.secondary{background:#eef2ff;color:#312e81}
+    .payment-dock__hint{margin-top:10px;font-size:12px;color:#64748b}
+    @media(max-width:900px){.payment-dock__trigger{font-size:12px;padding:7px 10px}.payment-dock__grid{grid-template-columns:1fr}}
+  </style>
+  <script id="payment-dock-script">
+    (function(){
+      function initPaymentDock(){
+        if(document.getElementById('payment-dock-mounted')) return;
+        var nav=document.querySelector('.main-header .navbar-nav.ml-auto');
+        if(!nav) return;
+        var item=document.createElement('li');
+        item.className='nav-item payment-header-slot';
+        item.id='payment-dock-mounted';
+        item.innerHTML='' +
+          '<div class="payment-dock" data-payment-dock>' +
+            '<button class="payment-dock__trigger" type="button" data-payment-open>QR / ชำระเงิน</button>' +
+            '<div class="payment-dock__modal" data-payment-close>' +
+              '<section class="payment-dock__card" aria-label="ข้อมูลการชำระเงิน" onclick="event.stopPropagation()">' +
+                '<div class="payment-dock__header">' +
+                  '<div>' +
+                    '<div class="payment-dock__bank">บัญชีชำระเงิน</div>' +
+                    '<div class="payment-dock__sub">เลือกโอนผ่าน 1 ใน 2 บัญชีด้านล่าง</div>' +
+                  '</div>' +
+                  '<button class="payment-dock__close" type="button" aria-label="ปิด" title="ปิด" data-payment-close>&times;</button>' +
+                '</div>' +
+                '<div class="payment-dock__body">' +
+                  '<div class="payment-dock__grid">' +
+                    '<article class="payment-dock__panel">' +
+                      '<div class="payment-dock__panel-header">' +
+                        '<div>' +
+                          '<div class="payment-dock__panel-bank">SCB</div>' +
+                          '<div class="payment-dock__panel-sub">ชำระเงินผ่าน QR หรือโอนเข้าบัญชี</div>' +
+                        '</div>' +
+                        '<span class="payment-dock__badge">1/2</span>' +
+                      '</div>' +
+                      '<img class="payment-dock__qr" src="/payment/qr.jpg" alt="SCB QR Payment">' +
+                      '<div class="payment-dock__label">เลขที่บัญชี</div>' +
+                      '<div class="payment-dock__value">0334421279</div>' +
+                      '<div class="payment-dock__label">ชื่อเจ้าของบัญชี</div>' +
+                      '<div class="payment-dock__meta">นิตยา</div>' +
+                      '<div class="payment-dock__label">ธนาคาร</div>' +
+                      '<div class="payment-dock__meta">SCB - ธนาคารไทยพาณิชย์</div>' +
+                      '<div class="payment-dock__actions">' +
+                        '<button class="payment-dock__btn" type="button" data-copy-account="0334421279">คัดลอกเลขบัญชี</button>' +
+                        '<a class="payment-dock__btn secondary" href="/payment/qr.jpg" target="_blank" rel="noreferrer">เปิด QR</a>' +
+                      '</div>' +
+                      '<div class="payment-dock__hint">ชำระเงินเข้าบัญชีเลขที่ : 0334421279</div>' +
+                    '</article>' +
+                    '<article class="payment-dock__panel">' +
+                      '<div class="payment-dock__panel-header">' +
+                        '<div>' +
+                          '<div class="payment-dock__panel-bank">Bangkok Bank</div>' +
+                          '<div class="payment-dock__panel-sub">PromptPay / โอนเข้าบัญชีธนาคาร</div>' +
+                        '</div>' +
+                        '<span class="payment-dock__badge">2/2</span>' +
+                      '</div>' +
+                      '<img class="payment-dock__qr" src="/payment/bangkok-bank.jpg" alt="Bangkok Bank PromptPay QR">' +
+                      '<div class="payment-dock__label">เลขที่บัญชี</div>' +
+                      '<div class="payment-dock__value">098-7-631488</div>' +
+                      '<div class="payment-dock__label">ชื่อเจ้าของบัญชี</div>' +
+                      '<div class="payment-dock__meta">นิตยา</div>' +
+                      '<div class="payment-dock__label">ธนาคาร</div>' +
+                      '<div class="payment-dock__meta">Bangkok Bank</div>' +
+                      '<div class="payment-dock__actions">' +
+                        '<button class="payment-dock__btn" type="button" data-copy-account="098-7-631488">คัดลอกเลขบัญชี</button>' +
+                        '<a class="payment-dock__btn secondary" href="/payment/bangkok-bank.jpg" target="_blank" rel="noreferrer">เปิด QR</a>' +
+                      '</div>' +
+                      '<div class="payment-dock__hint">ชำระเงินเข้าบัญชีเลขที่ : 098-7-631488</div>' +
+                    '</article>' +
+                  '</div>' +
+                '</div>' +
+              '</section>' +
+            '</div>' +
+          '</div>';
+        nav.appendChild(item);
+        var dock=item.querySelector('[data-payment-dock]');
+        var open=dock.querySelector('[data-payment-open]');
+        var closeEls=dock.querySelectorAll('[data-payment-close]');
+        var copyButtons=dock.querySelectorAll('[data-copy-account]');
+        var autoCloseTimer=null;
+
+        function closeModal(){
+          dock.classList.remove('is-open');
+          if(autoCloseTimer){
+            clearTimeout(autoCloseTimer);
+            autoCloseTimer=null;
+          }
+        }
+
+        function openModal(auto){
+          dock.classList.add('is-open');
+          if(auto){
+            if(autoCloseTimer){
+              clearTimeout(autoCloseTimer);
+            }
+            var timeoutMs=7000+Math.floor(Math.random()*1001);
+            autoCloseTimer=setTimeout(closeModal,timeoutMs);
+          }
+        }
+
+        open.addEventListener('click',function(){openModal(false);});
+        closeEls.forEach(function(el){el.addEventListener('click',closeModal);});
+        copyButtons.forEach(function(button){
+          button.addEventListener('click',function(){
+            var value=button.getAttribute('data-copy-account')||'';
+            if(!value) return;
+            var original=button.textContent;
+            var done=function(){
+              button.textContent='คัดลอกแล้ว';
+              setTimeout(function(){button.textContent=original;},1600);
+            };
+            if(navigator.clipboard&&navigator.clipboard.writeText){
+              navigator.clipboard.writeText(value).then(done);
+            }else{
+              var input=document.createElement('input');
+              input.value=value;
+              document.body.appendChild(input);
+              input.select();
+              document.execCommand('copy');
+              input.remove();
+              done();
+            }
+          });
+        });
+
+        setTimeout(function(){openModal(true);},350);
+      }
+
+      if(document.readyState==='loading'){
+        document.addEventListener('DOMContentLoaded',initPaymentDock);
+      }else{
+        initPaymentDock();
+      }
+    })();
+  </script>`;
 }
 
 function injectRuntime(html: string): string {

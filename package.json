@@ -13,7 +13,8 @@
     "start:prod": "node dist/server.js",
     "sync:catalog": "tsx src/scripts/syncCatalog.ts",
     "import:finance": "tsx src/scripts/importFinanceWorkbook.ts",
-    "smoke:frontend": "tsx src/scripts/smokeFrontendAssets.ts"
+    "smoke:frontend": "tsx src/scripts/smokeFrontendAssets.ts",
+    "audit:frontend-language": "tsx src/scripts/auditFrontendLanguage.ts"
   },
   "dependencies": {
     "@types/multer": "^2.1.0",
@@ -27,6 +28,7 @@
     "@types/express": "^5.0.1",
     "@types/express-session": "^1.18.1",
     "@types/node": "^22.13.11",
+    "jsdom": "^29.0.1",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   }
