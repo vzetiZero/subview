@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: node-admin-ts-mvp
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start:prod
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_LANGUAGE
+        value: th
+      - key: APP_LOCALE
+        value: th-TH
+      - key: TRUST_PROXY
+        value: true
+      - key: SESSION_SECURE
+        value: true
+      - key: SESSION_SAME_SITE
+        value: lax
+      - key: AUTO_SYNC_FRONTEND
+        value: true
+      - key: BASE_CURRENCY_CODE
+        value: VND
+      - key: DISPLAY_CURRENCY_CODE
+        value: THB
+      - key: VND_TO_THB_RATE
+        value: "0.0013"
+      - key: DB_PATH
+        value: /opt/render/project/src/data/mvp.sqlite
+      - key: FRONTEND_ROOT
+        value: /opt/render/project/src/frontend
+      - key: SESSION_SECRET
+        generateValue: true

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Seo meta -->
+    <title>Đăng nhập - VinaFabo</title>
+    <meta name="description" content="Đăng nhập - VinaFabo">
+    
+    <link rel="canonical" href="login.html" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Đăng nhập - VinaFabo" />
+    <meta property="og:description" content="Đăng nhập - VinaFabo" />
+    <meta property="og:url" content="login.html" />
+    <meta property="og:site_name" content="VinaFabo" />
+    <meta property="og:image" content="../cdn.vinafabo.net/uploads/sites/1c4ca4238a0b9/og_image.jpg" />
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="../fonts.googleapis.com/css43b1.css">
+    <!-- Font Awesome -->
+    <!-- Font Awesome is loaded locally via JS at the end of the page -->
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.minf013.css">
+    <link rel="stylesheet" href="css/appf013.css">
+    <link rel="icon" href="../cdn.vinafabo.net/uploads/sites/1c4ca4238a0b9/favicon.png" />
+    <link rel="apple-touch-icon" href="../cdn.vinafabo.net/uploads/sites/1c4ca4238a0b9/favicon.png" />
+    <meta name="msapplication-TileImage" content="../cdn.vinafabo.net/uploads/sites/1c4ca4238a0b9/favicon.png" />
+    <style id="custom-css" type="text/css">
+    :root {
+        --primary: #005AE0;
+        --secondary: #FFC100;
+    }
+</style>
+<!-- Google Tag Manager stripped for offline -->
+
+<meta name="cryptomus" content="d175b01c" />
+    <style id="offline-i18n-preload-style">html[data-offline-i18n-pending="1"] body{visibility:hidden;}</style>
+    <script data-offline-i18n-preload="1">(function(){try{var lang=localStorage.getItem('offline-language')||'en';document.documentElement.setAttribute('lang',lang);document.documentElement.setAttribute('data-offline-i18n-pending','1');}catch(e){document.documentElement.setAttribute('lang','en');document.documentElement.setAttribute('data-offline-i18n-pending','1');}})();</script>
+</head>
+<body class="hold-transition login-page">
+    <!-- Google Tag Manager noscript stripped for offline --><div class="login-box">
+  <!-- /.login-logo -->
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <a href="." class="h1"><img style="max-width: 88%" src="../cdn.vinafabo.net/uploads/sites/1c4ca4238a0b9/logo.svg"></a>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg pb-3">Vui lòng đăng nhập để sử dụng dịch vụ</p>
+      
+      <!-- Validation Errors -->
+            <form id="form-auth" method="POST" action="login.html">
+        <input type="hidden" name="_token" value="An2voBwDjSAys19Noozv1TwpXPPMy8Ja2ZDAJ6q1">        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Tên đăng nhập, số điện thoại, email" id="name" name="name" value="" required autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" minlength="4" maxlength="50"/>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" id="password" class="form-control" placeholder="Mật khẩu" name="password" required autocomplete="current-password" minlength="6"/>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+                <input id="remember" type="checkbox" name="remember" checked>
+                <label for="remember">
+                Nhớ tài khoản              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-auth-links text-center mt-2 mb-3">
+          
+          <div id="recaptcha" class="g-recaptcha"
+            data-sitekey="6LfBtRopAAAAAEqkac7UGt93EHYo10LsiL-5zwr4"
+            data-callback="onSubmit"
+            data-size="invisible"></div>
+          
+          <button class="btn btn-block btn-primary" id="btn-submit">
+            Đăng nhập          </button>
+        </div>
+      </form>
+      <!-- /.social-auth-links -->
+      <div class="row">
+        <div class="col-6">
+          <a href="forgot-password.html">Quên mật khẩu ?</a>
+        </div>
+        <div class="col-6 text-right">
+          <a href="register.html" class="text-center">Đăng ký</a>
+        </div>
+      </div>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Font Awesome -->
+<script src="plugins/fontawesome-free/js/all.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script type="text/javascript">
+  var formAuth = document.getElementById('form-auth');
+  var buttonSubmit = document.getElementById('btn-submit');
+  function onSubmit() {
+    buttonSubmit.disabled = true;
+    formAuth.submit();
+  }
+  formAuth.addEventListener('submit', function (event) {
+    event.preventDefault();
+    grecaptcha.execute();
+  });
+</script>
+
+<!-- Cloudflare beacon stripped for offline -->
+    <script src="js/offline-i18n.js"></script>
+    <script src="js/offline-i18n-data.js"></script>
+</body>
+</html>
